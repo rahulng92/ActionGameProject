@@ -11,6 +11,7 @@
 #include "Components/Input/ActionGameInputComponent.h"
 #include "AbilitySystem/ActionGameAbilitySystemComponent.h"
 #include "DataAssets/StartUpData/DataAsset_HeroStartUpData.h"
+#include "Components/Combat/HeroCombatComponent.h"
 #include "ActionGameProjectGameplayTags.h"
 
 #include "DebugHelper.h"
@@ -37,6 +38,8 @@ AActionGameHeroCharacter::AActionGameHeroCharacter()
 	GetCharacterMovement()->RotationRate = FRotator(0.f, 500.f, 0.f);
 	GetCharacterMovement()->MaxWalkSpeed = 400.f;
 	GetCharacterMovement()->BrakingDecelerationWalking = 2000.f;
+
+	HeroCombatComponent = CreateDefaultSubobject<UHeroCombatComponent>(TEXT("HeroCombatComponent"));
 }
 
 void AActionGameHeroCharacter::PossessedBy(AController* NewController)
@@ -81,6 +84,13 @@ void AActionGameHeroCharacter::SetupPlayerInputComponent(UInputComponent* Player
 		this,
 		&ThisClass::Input_Look
 	);
+
+	ActionGameInputComponent->BindAbilityInputAction(
+		InputConfigDataAsset,
+		this,
+		&ThisClass::Input_AbilityInputPressed,
+		&ThisClass::Input_AbilityInputReleased
+	);
 }
 
 void AActionGameHeroCharacter::BeginPlay()
@@ -122,6 +132,16 @@ void AActionGameHeroCharacter::Input_Look(const FInputActionValue& InputActionVa
 	{
 		AddControllerPitchInput(LookAxisVector.Y);
 	}
+}
+
+void AActionGameHeroCharacter::Input_AbilityInputPressed(FGameplayTag InputTag)
+{
+	CustomAbilitySystemComponent->OnAbilityInputPressed(InputTag);
+}
+
+void AActionGameHeroCharacter::Input_AbilityInputReleased(FGameplayTag InputTag)
+{
+	CustomAbilitySystemComponent->OnAbilityInputReleased(InputTag);
 }
 
 

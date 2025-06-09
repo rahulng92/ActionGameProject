@@ -20,7 +20,7 @@ class ACTIONGAMEPROJECT_API UActionGameCharacterAnimInstance : public UActionGam
 
 public:
 	virtual void NativeInitializeAnimation() override;
-	virtual void NativeThreadSafeUpdateAnimation(float DeltaSeconds);
+	virtual void NativeThreadSafeUpdateAnimation(float DeltaSeconds) override;
 
 protected:
 

@@ -2,4 +2,9 @@
 
 
 #include "AnimInstances/Hero/HeroLinkedAnimeLayer.h"
+#include "AnimInstances/ActionGameHeroAnimInstance.h"
 
+UActionGameHeroAnimInstance* UHeroLinkedAnimeLayer::GetHeroAnimInstance() const
+{
+    return Cast<UActionGameHeroAnimInstance>(GetOwningComponent()->GetAnimInstance());
+}

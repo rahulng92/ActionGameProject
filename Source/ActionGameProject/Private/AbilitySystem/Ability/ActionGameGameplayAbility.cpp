@@ -3,6 +3,7 @@
 
 #include "AbilitySystem/Ability/ActionGameGameplayAbility.h"
 #include "AbilitySystem/ActionGameAbilitySystemComponent.h"
+#include "Components/Combat/PawnCombatComponent.h"
 
 #include "DebugHelper.h"
 
@@ -33,4 +34,14 @@ void UActionGameGameplayAbility::EndAbility(const FGameplayAbilitySpecHandle Han
 			ActorInfo->AbilitySystemComponent->ClearAbility(Handle);
 		}
 	}
+}
+
+UPawnCombatComponent* UActionGameGameplayAbility::GetPawnCombatComponentFromActorInfo() const
+{
+	return GetAvatarActorFromActorInfo()->FindComponentByClass<UPawnCombatComponent>();
+}
+
+UActionGameAbilitySystemComponent* UActionGameGameplayAbility::GetActionGameAbilitySystemComponentFromActorInfo() const
+{
+	return Cast<UActionGameAbilitySystemComponent>(CurrentActorInfo->AbilitySystemComponent);
 }

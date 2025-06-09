@@ -3,3 +3,12 @@
 
 #include "Items/Weapons/ActionGameHeroWeapon.h"
 
+void AActionGameHeroWeapon::AssignGrantedAbilitySpecHandle(const TArray<FGameplayAbilitySpecHandle> InSpecHandles)
+{
+	GrantedAbilitySpecHandles = InSpecHandles;
+}
+
+TArray<FGameplayAbilitySpecHandle> AActionGameHeroWeapon::GetGrantedAbilitySpecHandles() const
+{
+	return GrantedAbilitySpecHandles;
+}
