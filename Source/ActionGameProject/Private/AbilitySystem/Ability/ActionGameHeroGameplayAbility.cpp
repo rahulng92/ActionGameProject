@@ -5,6 +5,7 @@
 #include "Characters/ActionGameHeroCharacter.h"
 #include "Controllers/ActionGameHeroController.h"
 
+
 AActionGameHeroCharacter* UActionGameHeroGameplayAbility::GetHeroCharacterFromActorInfo()
 {
 	if (!CachedHeroCharacter.IsValid())
