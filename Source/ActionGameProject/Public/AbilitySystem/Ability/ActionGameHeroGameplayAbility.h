@@ -20,8 +20,6 @@ class ACTIONGAMEPROJECT_API UActionGameHeroGameplayAbility : public UActionGameG
 	
 public:
 
-	UActionGameHeroGameplayAbility();
-
 	UFUNCTION(BlueprintPure, Category = "Warrior|Ability")
 	AActionGameHeroCharacter* GetHeroCharacterFromActorInfo();
 

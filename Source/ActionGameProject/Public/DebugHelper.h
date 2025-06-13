@@ -11,4 +11,5 @@ namespace Debug
 			UE_LOG(LogTemp, Warning, TEXT("%s"), *Msg);
 		}
 	}
+	//ex use case FString::Printf(TEXT("A weapon named: %s has been registered using the tag %s"), *WeaponToRegister->GetName(), *WeaponTagToRegister.ToString());
 }

@@ -5,7 +5,7 @@
 #include "GameplayTagContainer.h"
 #include "ActionGameStructTypes.generated.h"
 
-class UActionGameGameplayAbility;
+class UActionGameHeroGameplayAbility;
 
 USTRUCT(BlueprintType)
 struct FActionGameHeroAbilitySet
@@ -16,7 +16,7 @@ struct FActionGameHeroAbilitySet
 	FGameplayTag InputTag;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	TSubclassOf<UActionGameGameplayAbility> AbilityToGrant;
+	TSubclassOf<UActionGameHeroGameplayAbility> AbilityToGrant;
 
 	bool isValid() const;
 };

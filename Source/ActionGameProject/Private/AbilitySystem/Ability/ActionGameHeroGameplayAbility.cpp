@@ -6,11 +6,6 @@
 #include "Controllers/ActionGameHeroController.h"
 
 
-UActionGameHeroGameplayAbility::UActionGameHeroGameplayAbility()
-{
-	UE_LOG(LogTemp, Warning, TEXT("created gameplay ability %s"), *this->GetName());
-}
-
 AActionGameHeroCharacter* UActionGameHeroGameplayAbility::GetHeroCharacterFromActorInfo()
 {
 	if (!CachedHeroCharacter.IsValid())

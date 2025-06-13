@@ -2,7 +2,7 @@
 
 
 #include "ActionGameTypes/ActionGameStructTypes.h"
-#include "AbilitySystem/Ability/ActionGameGameplayAbility.h"
+#include "AbilitySystem/Ability/ActionGameHeroGameplayAbility.h"
 
 bool FActionGameHeroAbilitySet::isValid() const
 {
