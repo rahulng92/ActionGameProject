@@ -13,6 +13,7 @@ void UDataAsset_StartUpDataBase::GiveToAbilitySystemComponent(UActionGameAbility
 	GrantAbilities(ReactiveAbilities, InASCToGive, ApplyLevel);
 }
 
+/* Go througt he list of abilities in param and give those gameplay abilities to the ability system component*/
 void UDataAsset_StartUpDataBase::GrantAbilities(const TArray<TSubclassOf<UActionGameGameplayAbility>>& InAbilitiesToGive, UActionGameAbilitySystemComponent* InASCToGive, int32 ApplyLevel)
 {
 	if (InAbilitiesToGive.IsEmpty())

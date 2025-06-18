@@ -30,3 +30,8 @@ UHeroCombatComponent* UActionGameHeroGameplayAbility::GetHeroCombatComponentFrom
 {
 	return GetHeroCharacterFromActorInfo()->GetHeroCombatComponent();
 }
+
+UCharacterMovementComponent * UActionGameHeroGameplayAbility::GetHeroMovementComponentFromActorInfo()
+{
+	return GetHeroCharacterFromActorInfo()->GetCharacterMovement();
+}

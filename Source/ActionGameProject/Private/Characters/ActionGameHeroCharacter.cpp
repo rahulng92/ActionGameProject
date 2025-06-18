@@ -46,8 +46,11 @@ void AActionGameHeroCharacter::PossessedBy(AController* NewController)
 {
 	Super::PossessedBy(NewController);
 
+	// choosing to load this synchronously since its core to player characters behavior
 	if (!CharacterStartUpData.IsNull())
 	{
+		// this is similar to how we load asyn stuff data objects in Unity too like scriptable objects but we need to Load it ourselves instead of 
+		// refrencing an asset in project and using that directly like Unity does 
 		if (UDataAsset_StartUpDataBase* LoadedData = CharacterStartUpData.LoadSynchronous())
 		{
 			LoadedData->GiveToAbilitySystemComponent(CustomAbilitySystemComponent);
@@ -57,7 +60,7 @@ void AActionGameHeroCharacter::PossessedBy(AController* NewController)
 
 void AActionGameHeroCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
-	checkf(InputConfigDataAsset, TEXT("N assigend valid Input config data asset on controller character"));
+	checkf(InputConfigDataAsset, TEXT(" Invalid Input config data asset on controller character"));
 	ULocalPlayer* LocalPlayer = GetController<APlayerController>()->GetLocalPlayer();
 
 	UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(LocalPlayer);
@@ -67,6 +70,7 @@ void AActionGameHeroCharacter::SetupPlayerInputComponent(UInputComponent* Player
 	Subsystem->AddMappingContext(InputConfigDataAsset->DefaultMappingContext, 0);
 
 	//CastChecked crashes on invalid cast
+	//Note that the default Input Component in the project setting is set to UActionGameInputComponent so this behavior is valid when cast happens
 	UActionGameInputComponent* ActionGameInputComponent = CastChecked<UActionGameInputComponent>(PlayerInputComponent);
 	
 	ActionGameInputComponent->BindNativeInputAction(

@@ -5,10 +5,11 @@
 #include "AbilitySystem/ActionGameAbilitySystemComponent.h"
 #include "AbilitySystem/ActionGameAttributeSet.h"
 
-// Sets default values
+/** We initialize some basic components that are required for all the Characters ( enemies, player ) that we would need
+	We are extending the Gameplay Ability System Component to add some custom behavior for when start building out the player and enemy characters 
+*/
 AActionGameBaseCharacter::AActionGameBaseCharacter()
 {
- 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
 	PrimaryActorTick.bStartWithTickEnabled = false;
 
@@ -20,11 +21,15 @@ AActionGameBaseCharacter::AActionGameBaseCharacter()
 
 }
 
+/** Implementing the Interface IAbilitySystemInterface to return our custom ability system 
+*/
 UAbilitySystemComponent* AActionGameBaseCharacter::GetAbilitySystemComponent() const
 {
 	return GetCustomAbilitySystemComponent();
 }
 
+
+/*Called when this Pawn is possessed*/
 void AActionGameBaseCharacter::PossessedBy(AController* NewController)
 {
 	Super::PossessedBy(NewController);

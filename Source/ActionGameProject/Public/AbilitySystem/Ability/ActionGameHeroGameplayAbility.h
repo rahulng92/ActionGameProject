@@ -9,6 +9,7 @@
 class AActionGameHeroCharacter;
 class AActionGameHeroController;
 class UHeroCombatComponent;
+class UCharacterMovementComponent;
 
 /**
  * 
@@ -20,14 +21,17 @@ class ACTIONGAMEPROJECT_API UActionGameHeroGameplayAbility : public UActionGameG
 	
 public:
 
-	UFUNCTION(BlueprintPure, Category = "Warrior|Ability")
+	UFUNCTION(BlueprintPure, Category = "Hero|Ability")
 	AActionGameHeroCharacter* GetHeroCharacterFromActorInfo();
 
-	UFUNCTION(BlueprintPure, Category = "Warrior|Ability")
+	UFUNCTION(BlueprintPure, Category = "Hero|Ability")
 	AActionGameHeroController* GetHeroControllerFromActorInfo();
 
-	UFUNCTION(BlueprintPure, Category = "Warrior|Ability")
+	UFUNCTION(BlueprintPure, Category = "Hero|Ability")
 	UHeroCombatComponent* GetHeroCombatComponentFromActorInfo();
+
+	UFUNCTION(BlueprintPure, Category = "Hero|Ability")
+	UCharacterMovementComponent* GetHeroMovementComponentFromActorInfo();
 private:
 
 	TWeakObjectPtr<AActionGameHeroCharacter> CachedHeroCharacter;

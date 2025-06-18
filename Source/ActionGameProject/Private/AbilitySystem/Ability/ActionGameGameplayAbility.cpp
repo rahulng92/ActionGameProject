@@ -41,6 +41,7 @@ UPawnCombatComponent* UActionGameGameplayAbility::GetPawnCombatComponentFromActo
 	return GetAvatarActorFromActorInfo()->FindComponentByClass<UPawnCombatComponent>();
 }
 
+// note that CurrentActorInfo si the actor that has been granted an abity so its basically a way to access the actor from the Ability Instance
 UActionGameAbilitySystemComponent* UActionGameGameplayAbility::GetActionGameAbilitySystemComponentFromActorInfo() const
 {
 	return Cast<UActionGameAbilitySystemComponent>(CurrentActorInfo->AbilitySystemComponent);
