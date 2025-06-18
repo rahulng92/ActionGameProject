@@ -11,6 +11,22 @@ void UDataAsset_StartUpDataBase::GiveToAbilitySystemComponent(UActionGameAbility
 
 	GrantAbilities(ActivateOnGivenAbilities, InASCToGive, ApplyLevel);
 	GrantAbilities(ReactiveAbilities, InASCToGive, ApplyLevel);
+
+	if (!StartupGameplayEffects.IsEmpty())
+	{
+		for (const TSubclassOf < UGameplayEffect >& EffectClass : StartupGameplayEffects)
+		{
+			if (!EffectClass) continue;
+
+			UGameplayEffect* EffectCDO = EffectClass->GetDefaultObject<UGameplayEffect>();
+
+			InASCToGive->ApplyGameplayEffectToSelf(
+				EffectCDO,
+				ApplyLevel,
+				InASCToGive->MakeEffectContext()
+			);
+		}
+	}
 }
 
 /* Go througt he list of abilities in param and give those gameplay abilities to the ability system component*/

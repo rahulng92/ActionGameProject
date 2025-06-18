@@ -8,6 +8,7 @@
 
 class UActionGameGameplayAbility;
 class UActionGameAbilitySystemComponent;
+class UGameplayEffect;
 /**
  * 
  */
@@ -25,6 +26,9 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, Category = "StartUpData")
 	TArray< TSubclassOf < UActionGameGameplayAbility > > ReactiveAbilities;// like death, on hit reactions
+
+	UPROPERTY(EditDefaultsOnly, Category = "StartUpData")
+	TArray< TSubclassOf < UGameplayEffect > > StartupGameplayEffects;
 
 	//ApplyLevel is for difficulty adjustment
 	void GrantAbilities(const TArray< TSubclassOf < UActionGameGameplayAbility > >& InAbilitiesToGive, UActionGameAbilitySystemComponent* InASCToGive, int32 ApplyLevel = 1);

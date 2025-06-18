@@ -29,5 +29,8 @@ namespace ActionGameProjectGameplayTags
 	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_Sprint_Stop, "Player.Ability.Sprint.Stop");
 
 	UE_DEFINE_GAMEPLAY_TAG(Player_Status_JumpToFinisher, "Player.Status.JumpToFinisher");
-		
+
+
+	/* Enemy Tags */
+	UE_DEFINE_GAMEPLAY_TAG(Enemy_Weapon, "Enemy.Weapon");
 }
