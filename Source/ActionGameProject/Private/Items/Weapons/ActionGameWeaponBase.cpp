@@ -3,6 +3,8 @@
 
 #include "Items/Weapons/ActionGameWeaponBase.h"
 #include "Components/BoxComponent.h"
+#include "DebugHelper.h"
+
 
 // Sets default values
 AActionGameWeaponBase::AActionGameWeaponBase()
@@ -17,5 +19,41 @@ AActionGameWeaponBase::AActionGameWeaponBase()
 	WeaponCollisionBox->SetupAttachment(GetRootComponent());
 	WeaponCollisionBox->SetBoxExtent(FVector(20.f));
 	WeaponCollisionBox->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	WeaponCollisionBox->OnComponentBeginOverlap.AddUniqueDynamic(this, &ThisClass::OnCollisionBoxBeginOverlap);
+	WeaponCollisionBox->OnComponentEndOverlap.AddUniqueDynamic(this, &ThisClass::OnCollisionBoxEndOverlap);
+}
+
+void AActionGameWeaponBase::OnCollisionBoxBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& result)
+{
+	APawn* WeaponOwningPawn = GetInstigator<APawn>();
+
+	checkf(WeaponOwningPawn, TEXT("Did not assign an instigator as owner of the weapon: %s"), *GetName());
+
+	if (APawn* HitPawn = Cast<APawn>(OtherActor))
+	{
+		if (WeaponOwningPawn != HitPawn)
+		{
+			Debug::Print(GetName() + TEXT(" begin overlap with ") + HitPawn->GetName(),FColor::Green);
+		}
+
+		//TODO:Implement hit check for enemy characters
+	}
+}
+
+void AActionGameWeaponBase::OnCollisionBoxEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+{
+	APawn* WeaponOwningPawn = GetInstigator<APawn>();
+
+	checkf(WeaponOwningPawn, TEXT("Did not assign an instigator as owner of the weapon: %s"), *GetName());
+
+	if (APawn* HitPawn = Cast<APawn>(OtherActor))
+	{
+		if (WeaponOwningPawn != HitPawn)
+		{
+			Debug::Print(GetName() + TEXT(" end overlap with ") + HitPawn->GetName(), FColor::Red);
+		}
+
+		//TODO:Implement hit check for enemy characters
+	}
 }
 

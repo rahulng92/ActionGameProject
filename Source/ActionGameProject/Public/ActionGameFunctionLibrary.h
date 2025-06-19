@@ -4,16 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
+#include "ActionGameTypes/ActionGameEnumTypes.h"
 #include "ActionGameFunctionLibrary.generated.h"
 
 class UActionGameAbilitySystemComponent;
-
-UENUM()
-enum class UActionGameConfirmType : uint8
-{
-	Yes,
-	No
-};
+class UPawnCombatComponent;
 
 /**
  * 
@@ -37,5 +32,10 @@ public:
 
 	//ExpandEnumAsExecs provdes multiple execution pins for use on blueprint callable functions
 	UFUNCTION(BlueprintCallable, Category = "ActionGame|FunctionLibrary", meta = (DisplayName = "Does Actor Have Tag", ExpandEnumAsExecs = "OutConfirmType"))
-	static void BP_DoesActorHaveTag(AActor* InActor, FGameplayTag TagToCheck, UActionGameConfirmType& OutConfirmType);
+	static void BP_DoesActorHaveTag(AActor* InActor, FGameplayTag TagToCheck, EActionGameConfirmType& OutConfirmType);
+
+	static UPawnCombatComponent* NativeGetPawnCombatComponentFromActor(AActor* InActor);
+
+	UFUNCTION(BlueprintCallable, Category = "ActionGame|FunctionLibrary", meta = (DisplayName = "Get Pawn Combat Component From Actor", ExpandEnumAsExecs = "OutValidType"))
+	static UPawnCombatComponent* BP_GetPawnCombatComponentFromActor(AActor * InActor, EActionGameValidType& OutValidType);
 };

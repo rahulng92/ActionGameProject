@@ -20,6 +20,10 @@ public:
 
 	AActionGameEnemyCharacter();
 
+	//~ Begin IPawnCombatInterface Interface.
+	virtual UPawnCombatComponent* GetPawnCombatComponent() const override;
+	//~ Begin IPawnCombatInterface Interface.
+
 protected:
 	//~ Begin APawn Interface.
 	virtual void PossessedBy(AController* NewController) override;

@@ -4,6 +4,7 @@
 #include "ActionGameFunctionLibrary.h"
 #include "AbilitySystemBlueprintLibrary.h"
 #include "AbilitySystem/ActionGameAbilitySystemComponent.h"
+#include "Interfaces/PawnCombatInterface.h"
 
 UActionGameAbilitySystemComponent* UActionGameFunctionLibrary::NativeGetWarriorASCFromActor(AActor* InActor)
 {
@@ -44,7 +45,28 @@ bool UActionGameFunctionLibrary::NativeDoesActorHaveTag(AActor* InActor, FGamepl
 	return AbilitySystemComponent->HasMatchingGameplayTag(TagToCheck);
 }
 
-void UActionGameFunctionLibrary::BP_DoesActorHaveTag(AActor* InActor, FGameplayTag TagToCheck, UActionGameConfirmType& OutConfirmType)
+void UActionGameFunctionLibrary::BP_DoesActorHaveTag(AActor* InActor, FGameplayTag TagToCheck, EActionGameConfirmType& OutConfirmType)
 {
-	OutConfirmType = NativeDoesActorHaveTag(InActor, TagToCheck) ? UActionGameConfirmType::Yes : UActionGameConfirmType::No;
+	OutConfirmType = NativeDoesActorHaveTag(InActor, TagToCheck) ? EActionGameConfirmType::Yes : EActionGameConfirmType::No;
+}
+
+UPawnCombatComponent* UActionGameFunctionLibrary::NativeGetPawnCombatComponentFromActor(AActor* InActor)
+{
+	check(InActor);
+
+	if (IPawnCombatInterface* PawnCombatInterface = Cast<IPawnCombatInterface>(InActor))
+	{
+		return PawnCombatInterface->GetPawnCombatComponent();
+	}
+
+	return nullptr;
+}
+
+UPawnCombatComponent* UActionGameFunctionLibrary::BP_GetPawnCombatComponentFromActor(AActor* InActor, EActionGameValidType& OutValidType)
+{
+	UPawnCombatComponent* CombatComponent = NativeGetPawnCombatComponentFromActor(InActor);
+	
+	OutValidType = CombatComponent ? EActionGameValidType::Valid : EActionGameValidType::Invalid;
+
+	return CombatComponent;
 }

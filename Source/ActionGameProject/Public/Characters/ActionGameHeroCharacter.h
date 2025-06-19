@@ -22,6 +22,10 @@ class ACTIONGAMEPROJECT_API AActionGameHeroCharacter : public AActionGameBaseCha
 public:
 	AActionGameHeroCharacter();
 
+	//~ Begin IPawnCombatInterface Interface.
+	virtual UPawnCombatComponent* GetPawnCombatComponent() const override;
+	//~ Begin IPawnCombatInterface Interface.
+
 protected:
 
 	//~ Begin APawn Interface.

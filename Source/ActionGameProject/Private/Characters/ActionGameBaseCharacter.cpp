@@ -28,6 +28,11 @@ UAbilitySystemComponent* AActionGameBaseCharacter::GetAbilitySystemComponent() c
 	return GetCustomAbilitySystemComponent();
 }
 
+UPawnCombatComponent* AActionGameBaseCharacter::GetPawnCombatComponent() const
+{
+	return nullptr;
+}
+
 
 /*Called when this Pawn is possessed*/
 void AActionGameBaseCharacter::PossessedBy(AController* NewController)

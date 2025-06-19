@@ -58,6 +58,11 @@ void AActionGameHeroCharacter::PossessedBy(AController* NewController)
 	}
 }
 
+UPawnCombatComponent* AActionGameHeroCharacter::GetPawnCombatComponent() const
+{
+	return HeroCombatComponent;
+}
+
 void AActionGameHeroCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	checkf(InputConfigDataAsset, TEXT(" Invalid Input config data asset on controller character"));
