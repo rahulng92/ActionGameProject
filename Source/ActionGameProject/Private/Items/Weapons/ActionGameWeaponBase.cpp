@@ -33,7 +33,7 @@ void AActionGameWeaponBase::OnCollisionBoxBeginOverlap(UPrimitiveComponent* Over
 	{
 		if (WeaponOwningPawn != HitPawn)
 		{
-			Debug::Print(GetName() + TEXT(" begin overlap with ") + HitPawn->GetName(),FColor::Green);
+			OnWeaponHitTargetBegin.ExecuteIfBound(OtherActor);
 		}
 
 		//TODO:Implement hit check for enemy characters
@@ -50,9 +50,8 @@ void AActionGameWeaponBase::OnCollisionBoxEndOverlap(UPrimitiveComponent* Overla
 	{
 		if (WeaponOwningPawn != HitPawn)
 		{
-			Debug::Print(GetName() + TEXT(" end overlap with ") + HitPawn->GetName(), FColor::Red);
+			OnWeaponHitTargetEnd.ExecuteIfBound(OtherActor);
 		}
-
 		//TODO:Implement hit check for enemy characters
 	}
 }

@@ -32,6 +32,11 @@ public:
 
 	UFUNCTION(BlueprintPure, Category = "Hero|Ability")
 	UCharacterMovementComponent* GetHeroMovementComponentFromActorInfo();
+
+	// Notes:applying a gameplay effect is how we will actually affect character attributes
+	UFUNCTION(BlueprintPure, Category = "Hero|Ability")
+	FGameplayEffectSpecHandle MakeHeroDamageEffectSpecHandle(TSubclassOf<UGameplayEffect> EffectClass,float WeaponBaseDamage, FGameplayTag CurrentAttackTypeTag, int32 UsedComboCount);
+
 private:
 
 	TWeakObjectPtr<AActionGameHeroCharacter> CachedHeroCharacter;

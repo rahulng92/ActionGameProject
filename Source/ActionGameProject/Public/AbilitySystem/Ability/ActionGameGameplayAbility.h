@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Abilities/GameplayAbility.h"
+#include "ActionGameTypes/ActionGameEnumTypes.h"
 #include "ActionGameGameplayAbility.generated.h"
 
 class UPawnCombatComponent;
@@ -37,9 +38,14 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "ActionGameGameplayAbility")
 	EActionGameAbilityActivationPolicy AbilityActivationPolicy = EActionGameAbilityActivationPolicy::OnTriggered;
 
-	UFUNCTION(BlueprintPure, Category = "Warrior|Ability")
+	UFUNCTION(BlueprintPure, Category = "ActionGame|Ability")
 	UPawnCombatComponent* GetPawnCombatComponentFromActorInfo() const;
 
-	UFUNCTION(BlueprintPure, Category = "Warrior|Ability")
+	UFUNCTION(BlueprintPure, Category = "ActionGame|Ability")
 	UActionGameAbilitySystemComponent* GetActionGameAbilitySystemComponentFromActorInfo() const;
+
+	FActiveGameplayEffectHandle NativeApplyEffectSpecHandleToTarget(AActor* TargetActor, const FGameplayEffectSpecHandle& SpecHandle);
+
+	UFUNCTION(BlueprintCallable, Category = "ActionGame|Ability", meta = (DisplayName = "Apply Gameplay Effect Spec Handle To Target Actor", ExpandEnumAsExecs = "OutSuccessType"))
+	FActiveGameplayEffectHandle BP_ApplyEffectSpecHandleToTarget(AActor* TargetActor, const FGameplayEffectSpecHandle& SpecHandle, EActionGameSuccessType& OutSuccessType);
 };

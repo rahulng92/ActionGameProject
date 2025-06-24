@@ -19,4 +19,14 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "ActionGame|Combat")
 	AActionGameHeroWeapon* GetHeroCarriedWeaponByTag(FGameplayTag InWeaponTag) const;
+
+	UFUNCTION(BlueprintCallable, Category = "ActionGame|Combat")
+	AActionGameHeroWeapon* GetHeroCurrentEquippedWeapon() const;
+
+	UFUNCTION(BlueprintCallable, Category = "ActionGame|Combat")
+	float GetHeroCurrentEquipedWeaponDamageAtLevel(float Level) const;
+
+	virtual void OnHitTargetActorStart(AActor* HitActor) override;
+
+	virtual void OnHitTargetActorEnd(AActor* InteractedActor) override;
 };

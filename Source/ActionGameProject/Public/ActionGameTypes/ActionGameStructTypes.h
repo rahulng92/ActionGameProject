@@ -3,6 +3,7 @@
 #pragma once
 
 #include "GameplayTagContainer.h"
+#include "ScalableFloat.h"
 #include "ActionGameStructTypes.generated.h"
 
 class UActionGameHeroGameplayAbility;
@@ -37,4 +38,8 @@ struct FActionGameHeroWeaponData
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta = (TitleProperty = "InputTag"))
 	TArray<FActionGameHeroAbilitySet> DefaultWeaponAbilities;
+
+	//We want damage to be calcualted for the weapon based on a curve
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	FScalableFloat WeaponBaseDamage;
 };

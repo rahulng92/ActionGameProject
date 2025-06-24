@@ -40,6 +40,14 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "ActionGame|Combat")
 	AActionGameWeaponBase* ToggleWeaponCollision(bool bShouldEnable, EToggleDamageType ToggleDamageType = EToggleDamageType::CurrentEquipedWeapon);
+
+	virtual void OnHitTargetActorStart(AActor* HitActor);
+
+	virtual void OnHitTargetActorEnd(AActor* InteractedActor);
+
+protected:
+	TArray<AActor*> OverlappedActors;
+
 private:
 	TMap<FGameplayTag, AActionGameWeaponBase*> CharacterCarriedWeaponMap;
 };

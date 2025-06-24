@@ -7,6 +7,7 @@
 #include "ActionGameWeaponBase.generated.h"
 
 class UBoxComponent;
+DECLARE_DELEGATE_OneParam(FOnTargetInteractedDelegate, AActor*)
 
 UCLASS()
 class ACTIONGAMEPROJECT_API AActionGameWeaponBase : public AActor
@@ -42,6 +43,10 @@ protected:
 		int32 OtherBodyIndex
 	);
 
+
 public:
 	FORCEINLINE UBoxComponent* GetWeaponCollisionBox() const { return WeaponCollisionBox; }
+
+	FOnTargetInteractedDelegate OnWeaponHitTargetBegin;
+	FOnTargetInteractedDelegate OnWeaponHitTargetEnd;
 };

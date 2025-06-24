@@ -13,3 +13,10 @@ enum class EActionGameValidType : uint8
 	Valid,
 	Invalid
 };
+
+UENUM()
+enum class EActionGameSuccessType : uint8
+{
+	Successful,
+	Failed
+};

@@ -18,9 +18,9 @@ void UPawnCombatComponent::RegisterSpawnedWeapon(FGameplayTag WeaponTagToRegiste
 	{
 		CurrentEquippedWeaponTag = WeaponTagToRegister;
 	}
-	/*const FString WeaponString = FString::Printf(TEXT("A weapon named: %s has been registered using the tag %s"), *WeaponToRegister->GetName(), *WeaponTagToRegister.ToString());
-	
-	Debug::Print(WeaponString);*/
+
+	WeaponToRegister->OnWeaponHitTargetBegin.BindUObject(this, &ThisClass::OnHitTargetActorStart);
+	WeaponToRegister->OnWeaponHitTargetEnd.BindUObject(this, &ThisClass::OnHitTargetActorEnd);
 }
 
 AActionGameWeaponBase* UPawnCombatComponent::GetCharacterCarriedWeaponByTag(FGameplayTag WeaponTagToGet) const
@@ -60,8 +60,18 @@ AActionGameWeaponBase* UPawnCombatComponent::ToggleWeaponCollision(bool bShouldE
 		else
 		{
 			WeaponToToggle->GetWeaponCollisionBox()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+			// every hit actor that was part of the collision event is removed
+			OverlappedActors.Empty();
 		}
 	}
 
 	return nullptr;
+}
+
+void UPawnCombatComponent::OnHitTargetActorStart(AActor* HitActor)
+{
+}
+
+void UPawnCombatComponent::OnHitTargetActorEnd(AActor* InteractedActor)
+{
 }
