@@ -25,6 +25,8 @@ public:
 
 	UActionGameAttributeSet();
 
+	virtual void PostGameplayEffectExecute(const struct FGameplayEffectModCallbackData& Data) override;
+
 	UPROPERTY(BlueprintReadOnly, Category = "Health")
 	FGameplayAttributeData CurrentHealth;
 	ATTRIBUTE_ACCESSORS(UActionGameAttributeSet, CurrentHealth)
@@ -48,4 +50,8 @@ public:
 	UPROPERTY(BlueprintReadOnly, Category = "Defence")
 	FGameplayAttributeData DefensePower;
 	ATTRIBUTE_ACCESSORS(UActionGameAttributeSet, DefensePower)
+
+	UPROPERTY(BlueprintReadOnly, Category = "DamageTaken") // buffer attribute to apply damage to current health
+	FGameplayAttributeData DamageTaken;
+	ATTRIBUTE_ACCESSORS(UActionGameAttributeSet, DamageTaken)
  };

@@ -13,5 +13,9 @@ UCLASS()
 class ACTIONGAMEPROJECT_API UGECalcDamageTaken : public UGameplayEffectExecutionCalculation
 {
 	GENERATED_BODY()
-	
+
+public:
+	UGECalcDamageTaken();
+
+	virtual void Execute_Implementation(const FGameplayEffectCustomExecutionParameters& ExecutionParams, FGameplayEffectCustomExecutionOutput& OutExecutionOutput) const override;
 };
