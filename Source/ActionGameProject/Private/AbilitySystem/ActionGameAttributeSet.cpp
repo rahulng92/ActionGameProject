@@ -3,6 +3,8 @@
 
 #include "AbilitySystem/ActionGameAttributeSet.h"
 #include "GameplayEffectExtension.h"
+#include "ActionGameProjectGameplayTags.h"
+#include "ActionGameFunctionLibrary.h"
 #include "DebugHelper.h"
 
 UActionGameAttributeSet::UActionGameAttributeSet()
@@ -52,10 +54,9 @@ void UActionGameAttributeSet::PostGameplayEffectExecute(const FGameplayEffectMod
 
 		//TODO::Notify the UI 
 
-		//TODO::Handle character death
-		if (NewCurrentHealth == 0.f)
+		if (NewCurrentHealth <= 0.f)
 		{
-
+			UActionGameFunctionLibrary::AddGameplayTagToActorIfNone(Data.Target.GetAvatarActor(), ActionGameProjectGameplayTags::Shared_Status_Dead);
 		}
 	}
 }
