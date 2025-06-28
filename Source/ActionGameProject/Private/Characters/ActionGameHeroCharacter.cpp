@@ -13,6 +13,7 @@
 #include "DataAssets/StartUpData/DataAsset_HeroStartUpData.h"
 #include "Components/Combat/HeroCombatComponent.h"
 #include "ActionGameProjectGameplayTags.h"
+#include "Components/UI/HeroUIComponent.h"
 
 #include "DebugHelper.h"
 
@@ -40,6 +41,7 @@ AActionGameHeroCharacter::AActionGameHeroCharacter()
 	GetCharacterMovement()->BrakingDecelerationWalking = 2000.f;
 
 	HeroCombatComponent = CreateDefaultSubobject<UHeroCombatComponent>(TEXT("HeroCombatComponent"));
+	HeroUIComponent = CreateDefaultSubobject<UHeroUIComponent>(TEXT("HeroUIComponent"));
 }
 
 void AActionGameHeroCharacter::PossessedBy(AController* NewController)
@@ -61,6 +63,16 @@ void AActionGameHeroCharacter::PossessedBy(AController* NewController)
 UPawnCombatComponent* AActionGameHeroCharacter::GetPawnCombatComponent() const
 {
 	return HeroCombatComponent;
+}
+
+UPawnUIComponent* AActionGameHeroCharacter::GetPawnUIComponent() const
+{
+	return HeroUIComponent;
+}
+
+UHeroUIComponent* AActionGameHeroCharacter::GetHeroUIComponent() const
+{
+	return HeroUIComponent;
 }
 
 void AActionGameHeroCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -100,11 +112,6 @@ void AActionGameHeroCharacter::SetupPlayerInputComponent(UInputComponent* Player
 		&ThisClass::Input_AbilityInputPressed,
 		&ThisClass::Input_AbilityInputReleased
 	);
-}
-
-void AActionGameHeroCharacter::BeginPlay()
-{
-	Super::BeginPlay();
 }
 
 void AActionGameHeroCharacter::Input_Move(const FInputActionValue& InputActionValue)

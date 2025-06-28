@@ -42,4 +42,7 @@ struct FActionGameHeroWeaponData
 	//We want damage to be calcualted for the weapon based on a curve
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	FScalableFloat WeaponBaseDamage;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	TSoftObjectPtr<UTexture2D> SoftWeaponIconTexture;
 };

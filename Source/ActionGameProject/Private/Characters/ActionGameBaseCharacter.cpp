@@ -33,6 +33,21 @@ UPawnCombatComponent* AActionGameBaseCharacter::GetPawnCombatComponent() const
 	return nullptr;
 }
 
+UPawnUIComponent* AActionGameBaseCharacter::GetPawnUIComponent() const
+{
+	return nullptr;
+}
+
+UHeroUIComponent* AActionGameBaseCharacter::GetHeroUIComponent() const
+{
+	return nullptr;
+}
+
+UEnemyUIComponent* AActionGameBaseCharacter::GetEnemyUIComponent() const
+{
+	return nullptr;
+}
+
 
 /*Called when this Pawn is possessed*/
 void AActionGameBaseCharacter::PossessedBy(AController* NewController)

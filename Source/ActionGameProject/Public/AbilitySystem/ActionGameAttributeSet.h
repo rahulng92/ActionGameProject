@@ -7,6 +7,7 @@
 #include "AbilitySystem/ActionGameAbilitySystemComponent.h"
 #include "ActionGameAttributeSet.generated.h"
 
+class IPawnUIInterface;
 
 #define ATTRIBUTE_ACCESSORS(ClassName, PropertyName) \
 GAMEPLAYATTRIBUTE_PROPERTY_GETTER(ClassName, PropertyName) \
@@ -54,4 +55,7 @@ public:
 	UPROPERTY(BlueprintReadOnly, Category = "DamageTaken") // buffer attribute to apply damage to current health
 	FGameplayAttributeData DamageTaken;
 	ATTRIBUTE_ACCESSORS(UActionGameAttributeSet, DamageTaken)
+
+private:
+	TWeakInterfacePtr<IPawnUIInterface> CachedPawnUIInterface;
  };

@@ -6,15 +6,19 @@
 #include "GameFramework/Character.h"
 #include "AbilitySystemInterface.h"
 #include "Interfaces/PawnCombatInterface.h"
+#include "Interfaces/PawnUIInterface.h"
 #include "ActionGameBaseCharacter.generated.h"
 
 
 class UActionGameAbilitySystemComponent;
 class UActionGameAttributeSet;
 class UDataAsset_StartUpDataBase;
+class UPawnUIComponent;
+class UHeroUIComponent;
+class UEnemyUIComponent;
 
 UCLASS()
-class ACTIONGAMEPROJECT_API AActionGameBaseCharacter : public ACharacter, public IAbilitySystemInterface, public IPawnCombatInterface
+class ACTIONGAMEPROJECT_API AActionGameBaseCharacter : public ACharacter, public IAbilitySystemInterface, public IPawnCombatInterface, public IPawnUIInterface
 {
 	GENERATED_BODY()
 
@@ -29,6 +33,14 @@ public:
 	//~ Begin IPawnCombatInterface Interface.
 	virtual UPawnCombatComponent* GetPawnCombatComponent() const override;
 	//~ Begin IPawnCombatInterface Interface.
+
+	//~ Begin IPawnUIInterface Interface.
+	virtual UPawnUIComponent* GetPawnUIComponent() const override;
+
+	virtual UHeroUIComponent* GetHeroUIComponent() const override;
+
+	virtual UEnemyUIComponent* GetEnemyUIComponent() const override;
+	//~ End IPawnUIInterface Interface
 
 protected:
 
