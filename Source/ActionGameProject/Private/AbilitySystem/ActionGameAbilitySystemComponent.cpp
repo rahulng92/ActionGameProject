@@ -3,6 +3,7 @@
 
 #include "AbilitySystem/ActionGameAbilitySystemComponent.h"
 #include "AbilitySystem/Ability/ActionGameGameplayAbility.h"
+#include "AbilitySystem/Ability/ActionGameHeroGameplayAbility.h"
 
 void UActionGameAbilitySystemComponent::OnAbilityInputPressed(const FGameplayTag& InInputTag)
 {
@@ -21,7 +22,7 @@ void UActionGameAbilitySystemComponent::OnAbilityInputPressed(const FGameplayTag
 
 void UActionGameAbilitySystemComponent::OnAbilityInputReleased(const FGameplayTag& InInputTag)
 {
-
+	
 }
 
 void UActionGameAbilitySystemComponent::GrantHeroWeaponAbilities(const TArray<FActionGameHeroAbilitySet>& InDefaultWeaponAblities, int32 ApplyLevel, TArray<FGameplayAbilitySpecHandle>& OutGrantedAbilitySpecHandle)
@@ -34,7 +35,8 @@ void UActionGameAbilitySystemComponent::GrantHeroWeaponAbilities(const TArray<FA
 	for (const FActionGameHeroAbilitySet& AbilitySet : InDefaultWeaponAblities)
 	{
 		if (!AbilitySet.isValid()) continue;
-
+		
+		
 		FGameplayAbilitySpec AbilitySpec(AbilitySet.AbilityToGrant);
 		AbilitySpec.SourceObject = GetAvatarActor();
 		AbilitySpec.Level = ApplyLevel;
