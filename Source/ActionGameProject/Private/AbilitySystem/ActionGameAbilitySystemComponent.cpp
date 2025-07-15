@@ -22,7 +22,18 @@ void UActionGameAbilitySystemComponent::OnAbilityInputPressed(const FGameplayTag
 
 void UActionGameAbilitySystemComponent::OnAbilityInputReleased(const FGameplayTag& InInputTag)
 {
-	
+
+	if (!InInputTag.IsValid())
+	{
+		return;
+	}
+
+	for (const FGameplayAbilitySpec& AbilitySpec : GetActivatableAbilities())
+	{
+		if (!AbilitySpec.DynamicAbilityTags.HasTagExact(InInputTag)) continue;
+
+		TryActivateAbility(AbilitySpec.Handle);
+	}
 }
 
 void UActionGameAbilitySystemComponent::GrantHeroWeaponAbilities(const TArray<FActionGameHeroAbilitySet>& InDefaultWeaponAblities, int32 ApplyLevel, TArray<FGameplayAbilitySpecHandle>& OutGrantedAbilitySpecHandle)
