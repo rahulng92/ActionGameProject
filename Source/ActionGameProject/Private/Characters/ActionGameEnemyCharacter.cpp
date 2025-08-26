@@ -78,7 +78,6 @@ void AActionGameEnemyCharacter::InitEnemyStartupData()
 				if (UDataAsset_StartUpDataBase* LoadedData = CharacterStartUpData.Get())
 				{
 					LoadedData->GiveToAbilitySystemComponent(CustomAbilitySystemComponent);
-					Debug::Print(TEXT("Enemy startup data loaded"));
 				}
 			}
 		)

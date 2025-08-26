@@ -4,14 +4,25 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
+#include "GenericTeamAgentInterface.h"
 #include "ActionGameHeroController.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class ACTIONGAMEPROJECT_API AActionGameHeroController : public APlayerController
+class ACTIONGAMEPROJECT_API AActionGameHeroController : public APlayerController, public IGenericTeamAgentInterface
 {
 	GENERATED_BODY()
 	
+public:
+
+	AActionGameHeroController();
+
+	//~ Begin IGenericTeamAgentInterface
+	virtual FGenericTeamId GetGenericTeamId() const override;
+	//~ End IGenericTeamAgentInterface
+
+private:
+	FGenericTeamId HeroTeamId;
 };
