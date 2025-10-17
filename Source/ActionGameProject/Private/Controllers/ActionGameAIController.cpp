@@ -35,8 +35,8 @@ ETeamAttitude::Type AActionGameAIController::GetTeamAttitudeTowards(const AActor
 	const APawn* PawnToCheck = Cast<const APawn>(&Other);
 
 	const IGenericTeamAgentInterface* OtherTeamAgent = Cast<const IGenericTeamAgentInterface>(PawnToCheck->GetController());
-
-	if (OtherTeamAgent && OtherTeamAgent->GetGenericTeamId() != GetGenericTeamId())
+	// we do < here cause the player character team id is 0
+	if (OtherTeamAgent && OtherTeamAgent->GetGenericTeamId() < GetGenericTeamId())
 	{
 		return ETeamAttitude::Hostile;
 	}
@@ -69,12 +69,14 @@ void AActionGameAIController::BeginPlay()
 
 void AActionGameAIController::OnEnemyPerceptionUpdated(AActor* Actor, FAIStimulus Stimulus)
 {
-	if (Stimulus.WasSuccessfullySensed() && Actor)
+	if (UBlackboardComponent* BlackboardComponent = GetBlackboardComponent())
 	{
-		//Debug::Print(Actor->GetName() + TEXT(" was sensed"), FColor::Cyan);
-		if (UBlackboardComponent* BlackboardComponent = GetBlackboardComponent())
+		if(!BlackboardComponent->GetValueAsObject(FName("TargetActor")))
 		{
-			BlackboardComponent->SetValueAsObject(FName("TargetActor"), Actor);
+			if (Stimulus.WasSuccessfullySensed() && Actor)
+			{
+				BlackboardComponent->SetValueAsObject(FName("TargetActor"), Actor);
+			}
 		}
 	}
 }
