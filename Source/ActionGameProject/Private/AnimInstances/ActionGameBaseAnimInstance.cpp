@@ -2,4 +2,14 @@
 
 
 #include "AnimInstances/ActionGameBaseAnimInstance.h"
+#include "ActionGameFunctionLibrary.h"
 
+bool UActionGameBaseAnimInstance::DoesOwnerHaveTag(FGameplayTag TagToCheck) const
+{
+    if (APawn* OwningPawn = TryGetPawnOwner())
+    {
+        return UActionGameFunctionLibrary::NativeDoesActorHaveTag(OwningPawn, TagToCheck);
+    }
+
+    return false;
+}
